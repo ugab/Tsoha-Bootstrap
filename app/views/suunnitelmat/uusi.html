@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Uusi äänestys</h1>
+
+  <form>
+
+    <div class="form-group">
+      <label>Nimi</label>
+      <input class="form-control" value="" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys alkaa</label>
+      <input class="form-control" value="pp.kk.vvvv" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys loppuu</label>
+      <input class="form-control" value="pp.kk.vvvv" type="text">
+    </div>
+    <div class="form-group">
+      <label>Järjestäjä</label>
+      <input class="form-control" value="" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea class="form-control">        
+      </textarea>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Näytetään äänestäjälle äänestystilanne      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Näytetään äänestäjälle johdossa oleva ehdokas      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Identifioitu äänestys      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Anna salasana</label>
+      <input class="form-control" value="" type="text">
+    </div>
+      
+      <h3>Vaihtoehdot</h3>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Ehdokas</th>
+        <th>Tietoja</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td>tupu</td>
+        <td>sininen</td>
+
+        <th><button class="btn btn-danger">Poista</button> </th>
+      </tr>
+    </tbody>
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td>hupu</td>
+        <td>vihreä</td>
+
+        <th><button class="btn btn-danger">Poista</button> </th>
+      </tr>
+    </tbody>
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td>lupu</td>
+        <td>punainen</td>
+
+        <th><button class="btn btn-danger">Poista</button> </th>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <a href="#" class="btn btn-success">Lisää ehdokas</a>
+  </p>
+      
+    <button type="submit" class="btn btn-primary">Tallenna äänestys</button>
+  </form>
+    
+{% endblock %}
