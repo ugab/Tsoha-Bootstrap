@@ -11,15 +11,3 @@ exit"
 
 echo "Valmis!"
 
-
-
-CREATE TABLE Aanestys(
-    id SERIAL PRIMARY KEY,
-    nimi varchar(12) NOT NULL,
-    aanestysalkaa Date,
-    aanestysaoppuu Date,
-    kuvaus varchar (400),
-    onkoid boolean DEFAULT FALSE,
-#    luojaid SERIAL,
-
-);

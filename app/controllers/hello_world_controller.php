@@ -1,5 +1,7 @@
 <?php
 
+require 'app/models/Aanestys.php';
+
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -8,8 +10,11 @@
     }
 
     public static function sandbox(){
-      // Testaa koodiasi täällä
-       View::make('helloworld.html');
+        $skyrim = Aanestys::find(1);
+        $games = Aanestys::all();
+        // Kint-luokan dump-metodi tulostaa muuttujan arvon
+        Kint::dump($games);
+        Kint::dump($skyrim);
     }
     
     public static function lista(){
@@ -17,8 +22,7 @@
     }
     
     public static function listaa_aanestykset(){
-        $aanestykset = aanestys::all();
-        
+        $aanestykset = aanestys::all();        
     }
 
     public static function muokkaa(){
