@@ -7,6 +7,11 @@
   <p>
     <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
   </p>
+  
+<h2>Kuvaus</h2>
+  <p>
+    {{aanestys.kuvaus}}
+  </p>  
 
 <h3>Vaihtoehdot</h3>
 
@@ -15,7 +20,7 @@
       <tr>
         <th>Ehdokas</th>
         <th>Tietoja</th>
-
+        <th>Aania</th>
       </tr>
     </thead>
 
@@ -24,44 +29,12 @@
         <tr>
           <!--<td><a href="{{base_path}}/aanestys/{{aanestys.id}}">{{aanestys.nimi}}</td>-->
           <td>{{ehdokas.nimi}}</td>          
-          <td>{{aanestys.kuvaus}}</td>
-
+          <td>{{ehdokas.kuvaus}}</td>
+          <td>{{ehdokas.aania}}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 
-<h3>Tilanne</h3>
-
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Ehdokas</th>
-        <th>Ääniä</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <!-- Listataan pelit tähän -->
-      <tr>
-        <td>tupu</td>
-        <td>15</td>
-      </tr>
-
-      <tr>
-        <td>hupu</td>
-        <td>7</td>
-      </tr>
-
-      <tr>
-        <td>lupu</td>
-        <td>33</td>
-      </tr>
-    
-    </tbody>
-
-
-
 
 {% endblock %}
-

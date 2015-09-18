@@ -9,7 +9,7 @@
   });
   
     $routes->get('/lista', function() {
-    HelloWorldController::lista();
+    AanestysController::lista();
     });
     
     $routes->get('/lista/:id', function($id){
@@ -19,9 +19,8 @@
     $routes->get('/muokkaa', function() {
       HelloWorldController::muokkaa();
     });
-
     
-    $routes->post('/aanestys', function(){
+    $routes->get('/aanestys', function(){
       HelloWorldController::aanestys();
     });
     

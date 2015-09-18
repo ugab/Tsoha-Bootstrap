@@ -10,10 +10,12 @@ require 'app/models/Aanestys.php';
     }
 
     public static function sandbox(){
+        
         $skyrim = Aanestys::find(1);
-        $games = Aanestys::all();
+        
+        $aanestykset = Ehdokas::all(1);
         // Kint-luokan dump-metodi tulostaa muuttujan arvon
-        Kint::dump($games);
+        Kint::dump($aanestykset);
         Kint::dump($skyrim);
     }
     
@@ -22,7 +24,7 @@ require 'app/models/Aanestys.php';
     }
     
     public static function listaa_aanestykset(){
-        $aanestykset = aanestys::all();        
+        $aanestykset = Aanestys::all();        
     }
 
     public static function muokkaa(){

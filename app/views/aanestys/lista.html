@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+  <h1>Äänestyslista</h1>
+
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Äänestys alkaa</th>
+        <th>Äänestys loppuu</th>
+        <th>Kuvaus</th>
+        <th>Onko identifioitu</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for aanestys in aanestykset %}
+        <tr>
+          <td><a href="{{base_path}}/lista/{{aanestys.id}}">{{aanestys.nimi}}</td>
+          <td>{{aanestys.aanestysalkaa}}</td>          
+          <td>{{aanestys.aanestysloppuu}}</td>
+          <td>{{aanestys.kuvaus}}</td>
+          <td>
+              {% if aanestys.onkoid %}
+                <label class="label label-success">identifioitu
+              {% else %}
+                <label class="label label-danger">ei oo identifioitu
+              {% endif %}
+          </td>          
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+
+
+  <p>
+    <a href="#" class="btn btn-success">Uusi äänestys</a>
+  </p>
+  
+{% endblock %}
