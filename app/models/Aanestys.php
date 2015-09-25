@@ -46,7 +46,7 @@ class Aanestys extends BaseModel{
         'id' => $row['id'],
         'nimi' => $row['nimi'],
         'aanestysalkaa' => $row['aanestysalkaa'],
-        'aanestysalppuu' => $row['aanestysloppuu'],
+        'aanestysloppuu' => $row['aanestysloppuu'],
         'kuvaus' => $row['kuvaus'],
         'onkoid' => $row['onkoid'],
         'luojaid' => $row['luojaid']
@@ -57,6 +57,9 @@ class Aanestys extends BaseModel{
 
     return null;
   }
+
+  
+  
 //  INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
 //VALUES (nimi, aanestysalkaa, aanestysloppuu, kuvaus, onkoid, luojaid); 
 
@@ -64,10 +67,14 @@ class Aanestys extends BaseModel{
     $query = DB::connection()->prepare('INSERT INTO Aanestys (nimi, aanestysalkaa, aanestysloppuu, kuvaus, onkoid, luojaid) VALUES (:nimi, :aanestysalkaa, :aanestysloppuu, :kuvaus, :onkoid, :luojaid) RETURNING id');
     $query->execute(array('nimi' => $this->nimi, 'aanestysalkaa' => $this->aanestysalkaa, 'aanestysloppuu' => $this->aanestysloppuu, 'kuvaus' => $this->kuvaus, 'onkoid' => $this->onkoid, 'luojaid' => $this->luojaid));
     $row = $query->fetch();
+    $this->id = $row['id'];
     Kint::trace();
     Kint::dump($row);
 
-
   }  
   
+  
+    public function validate_nimi(){
+        
+    }  
 }

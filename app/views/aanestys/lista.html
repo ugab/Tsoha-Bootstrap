@@ -20,7 +20,7 @@
     <tbody>
       {% for aanestys in aanestykset %}
         <tr>
-          <td><a href="{{base_path}}/lista/{{aanestys.id}}">{{aanestys.nimi}}</td>
+          <td><a href="{{base_path}}/{{aanestys.id}}">{{aanestys.nimi}}</td>
           <td>{{aanestys.aanestysalkaa}}</td>          
           <td>{{aanestys.aanestysloppuu}}</td>
           <td>{{aanestys.kuvaus}}</td>
@@ -38,7 +38,7 @@
 
 
   <p>
-    <a href="#" class="btn btn-success">Uusi äänestys</a>
+    <a href="uusi" class="btn btn-success">Uusi äänestys</a>
   </p>
   
 {% endblock %}

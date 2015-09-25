@@ -1,18 +1,28 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    AanestysController::lista();
   });
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
   
-    $routes->get('/lista', function() {
-    AanestysController::lista();
+//    $routes->get('/lista', function() {
+//    AanestysController::lista();
+//    });
+
+    $routes->post('/aanestys', function(){
+      AanestysController::store();
     });
     
-    $routes->get('/lista/:id', function($id){
+    // Pelin lisäyslomakkeen näyttäminen
+    $routes->get('/uusi', function(){
+      AanestysController::uusi();
+    });    
+    
+    
+    $routes->get('/:id', function($id){
         AanestysController::nayta($id);
     });
     
@@ -20,10 +30,10 @@
       HelloWorldController::muokkaa();
     });
     
-    $routes->get('/aanestys', function(){
-      HelloWorldController::aanestys();
-    });
+//    $routes->get('/aanestys', function(){
+//      HelloWorldController::aanestys();
+//    });
     
-    $routes->get('/uusi', function(){
-      HelloWorldController::uusi();
-    });  
+//    $routes->get('/uusi', function(){
+//      AanestysController::uusi();
+//    });  

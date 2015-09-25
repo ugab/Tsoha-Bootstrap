@@ -1,0 +1,47 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Uusi äänestys</h1>
+
+  <form method="post" action="{{base_path}}/aanestys">
+
+    <div class="form-group">
+      <label>Nimi</label>
+      <input name="nimi" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys alkaa</label>
+      <input name="aanestysalkaa" class="form-control" value="pp.kk.vvvv" type="text">
+    </div>
+    <div class="form-group">
+      <label>Äänestys loppuu</label>
+      <input name="aanestysloppuu" class="form-control" value="pp.kk.vvvv" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea name="kuvaus" class="form-control">        
+      </textarea>
+    </div>
+    <div class="checkbox">
+      
+        <input type='hidden' value='false' name='onkoid'>
+        <input type='checkbox' value='true' name='onkoid'> Identifioitu äänestys
+        
+    </div>
+      
+
+      
+      <h3>Vaihtoehdot</h3>
+
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää ehdokas</a>
+  </p>
+      
+    <button type="submit" class="btn btn-primary">Tallenna äänestys</button>
+  </form>
+    
+{% endblock %}
