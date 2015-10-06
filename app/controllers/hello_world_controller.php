@@ -11,12 +11,17 @@ require 'app/models/Aanestys.php';
 
     public static function sandbox(){
         
-        $skyrim = Aanestys::find(1);
-        
-        $aanestykset = Ehdokas::all(1);
-        // Kint-luokan dump-metodi tulostaa muuttujan arvon
-        Kint::dump($aanestykset);
-        Kint::dump($skyrim);
+    $doom = new Aanestys(array(
+        'nimi' => 'a',
+        'aanestysalkaa' => '20.04.2010',
+        'aanestysloppuu' => '20.04.2011',
+        'kuvaus' => 'kuvaus',
+        'onkoid' => 'onkoid',
+        'luojaid' => 'luojaid'
+        ));
+        $errors = $doom->errors();
+
+        Kint::dump($errors);
     }
     
     public static function lista(){

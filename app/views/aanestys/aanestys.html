@@ -3,15 +3,28 @@
 {% block content %}
 
   <h1>Äänestys</h1>
+  
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}  
 
-  <p>
+<form method="post" action="{{base_path}}/aanestys/{{aanestys.id}}/poista" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form>  
+<form method="get" action="{{base_path}}/aanestys/{{aanestys.id}}/muokkaa" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Muokkaa</button>
+</form>  
+  
+<!--  <p>
     <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
-  </p>
+  </p>-->
   
 <h2>Kuvaus</h2>
   <p>
     {{aanestys.kuvaus}}
-  </p>  
+  </p>
 
 <h3>Vaihtoehdot</h3>
 

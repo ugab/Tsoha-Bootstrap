@@ -6,6 +6,7 @@ class Aanestys extends BaseModel{
   
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_kuvaus', 'validate_nimi');
   }
   
     public static function all(){
@@ -72,9 +73,44 @@ class Aanestys extends BaseModel{
     Kint::dump($row);
 
   }  
+
+    public function update($id){
+    $query = DB::connection()->prepare('UPDATE Aanestys SET (nimi, aanestysalkaa, aanestysloppuu, kuvaus, onkoid, luojaid) = (:nimi, :aanestysalkaa, :aanestysloppuu, :kuvaus, :onkoid, :luojaid) WHERE id=:id');
+    $query->execute(array('id' => $id, 'nimi' => $this->nimi, 'aanestysalkaa' => $this->aanestysalkaa, 'aanestysloppuu' => $this->aanestysloppuu, 'kuvaus' => $this->kuvaus, 'onkoid' => $this->onkoid, 'luojaid' => $this->luojaid));
+    $row = $query->fetch();
+    $this->id = $id;
+
+  }  
+
+  
+    public function destroy($id){
+        $query = DB::connection()->prepare('DELETE FROM Aanestys where id = :id');
+        $query->execute(array('id' => $this->id));
+        $row = $query->fetch();
+  }    
   
   
     public function validate_nimi(){
-        
+        $errors = array();
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Nimeä ei annettu';
+        }
+        if (strlen($this->nimi) < 3) {
+            $errors[] = 'Nimen pituus liian lyhyt';
+        }
+        if (strlen($this->nimi) > 50) {
+            $errors[] = 'Nimen pituus liian pitkä';
+        }
+        return $errors;        
     }  
+    
+    public function validate_kuvaus(){
+
+        $errors = array();
+        if (strlen($this->kuvaus) > 400) {
+            $errors[] = 'kuvaus pituus liian pitkä';
+        }
+        return $errors;        
+    }      
+    
 }

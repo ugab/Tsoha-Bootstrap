@@ -20,8 +20,7 @@
     $routes->get('/uusi', function(){
       AanestysController::uusi();
     });    
-    
-    
+        
     $routes->get('/:id', function($id){
         AanestysController::nayta($id);
     });
@@ -30,10 +29,27 @@
       HelloWorldController::muokkaa();
     });
     
-//    $routes->get('/aanestys', function(){
-//      HelloWorldController::aanestys();
-//    });
+    $routes->get('/aanestys/:id/muokkaa', function($id){
+      // Pelin muokkauslomakkeen esittäminen
+      AanestysController::edit($id);
+    });
     
-//    $routes->get('/uusi', function(){
-//      AanestysController::uusi();
-//    });  
+    $routes->post('/aanestys/:id/muokkaa', function($id){
+      // Pelin muokkaaminen
+      AanestysController::update($id);
+    });
+
+    $routes->post('/aanestys/:id/poista', function($id){
+      // Pelin poisto
+      AanestysController::destroy($id);
+    });
+    
+    $routes->get('/kirjaudu', function(){
+      // Kirjautumislomakkeen esittäminen
+      UserController::login();
+    });
+    
+    $routes->post('/kirjaudu', function(){
+      // Kirjautumisen käsittely
+      UserController::handle_login();
+    });    
