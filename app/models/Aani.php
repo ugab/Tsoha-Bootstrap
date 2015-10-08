@@ -9,7 +9,7 @@
 class Aani extends BaseModel {
     public $id;
     public $aanestajaid;
-    public $aanestysid;
+    public $ehdokasid;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -22,25 +22,25 @@ class Aani extends BaseModel {
         $rows = $query->fetchAll();
         $aanet = array();
         foreach ($rows as $row) {
-            $aanet[] = new User(array(
+            $aanet[] = new Aani(array(
                 'id' => $row['id'],
                 'aanestajaid' => $row['aanestajaid'],
-                'aanestysid' => $row['aanestysid']
+                'ehdokasid' => $row['ehdokasid']
             ));
         }
         return $aanet;
     }
 
 
-    public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Aani WHERE id = :id LIMIT 1');
-        $query->execute(array('id' => $id));
+    public static function find($ehdokasid) {
+        $query = DB::connection()->prepare('SELECT * FROM Aani WHERE id = :ehdokasid');
+        $query->execute(array('ehdokasid' => $ehdokasid));
         $row = $query->fetch();
         if ($row) {
-            $aanet = new Kayttaja(array(
+            $aanet = new Aani(array(
                 'id' => $row['id'],
                 'aanestajaid' => $row['aanestajaid'],
-                'aanestysid' => $row['aanestysid']
+                'ehdokasid' => $row['ehdokasid']
             ));
         }
         return $aanet;

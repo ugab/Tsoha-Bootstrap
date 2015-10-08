@@ -9,13 +9,26 @@ class AanestysController extends BaseController{
     View::make('aanestys/lista.html', array('aanestykset' => $aanestykset));
   }
 
+  public static function omalista(){
+    $kayttaja=self::get_user_logged_in();  
+    $aanestykset = Aanestys::find_all($kayttaja->id);
+    
+    View::make('aanestys/omalista.html', array('aanestykset' => $aanestykset));
+  }
   
   public static function nayta($id){
       
     $aanestys = Aanestys::find($id);
     $ehdokkaat = Ehdokas::all($id);
     
-    View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+    $kayttaja=self::get_user_logged_in();
+    
+    if(($kayttaja->id)==$aanestys->luojaid){
+        View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+    }else{
+        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+    }
+    
   }
   
   public static function uusi(){
@@ -30,7 +43,8 @@ class AanestysController extends BaseController{
   public static function store(){
     // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
     $params = $_POST;
-
+    $kayttaja=self::get_user_logged_in();
+    
       $attributes = (array(
 //        'id' => $params['id'],
         'nimi' => $params['nimi'],
@@ -38,7 +52,7 @@ class AanestysController extends BaseController{
         'aanestysloppuu' => $params['aanestysloppuu'],
         'kuvaus' => $params['kuvaus'],
         'onkoid' => $params['onkoid'],
-        'luojaid' => '1'
+        'luojaid' => $kayttaja->id
       ));
 
       

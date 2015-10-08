@@ -35,7 +35,31 @@ class Aanestys extends BaseModel{
     return $Aanestykset;
   }
   
-  
+    public static function find_all($id){
+    // Alustetaan kysely tietokantayhteydellämme
+    $query = DB::connection()->prepare('SELECT * FROM Aanestys WHERE luojaid=:id');
+    // Suoritetaan kysely
+    $query->execute();
+    // Haetaan kyselyn tuottamat rivit
+    $rows = $query->fetchAll();
+    $Aanestykset = array();
+
+    // Käydään kyselyn tuottamat rivit läpi
+    foreach($rows as $row){
+      // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
+      $Aanestykset[] = new Aanestys(array(
+        'id' => $row['id'],
+        'nimi' => $row['nimi'],
+        'aanestysalkaa' => $row['aanestysalkaa'],
+        'aanestysloppuu' => $row['aanestysloppuu'],
+        'kuvaus' => $row['kuvaus'],
+        'onkoid' => $row['onkoid'],
+        'luojaid' => $row['luojaid']
+      ));
+    }
+
+    return $Aanestykset;
+  }  
   
     public static function find($id){
     $query = DB::connection()->prepare('SELECT * FROM Aanestys WHERE id = :id LIMIT 1');
@@ -84,9 +108,12 @@ class Aanestys extends BaseModel{
 
   
     public function destroy($id){
+        $query = DB::connection()->prepare('DELETE FROM Ehdokas where aanestysid = :id');
+        $query->execute(array('id' => $this->id));
+        
         $query = DB::connection()->prepare('DELETE FROM Aanestys where id = :id');
         $query->execute(array('id' => $this->id));
-        $row = $query->fetch();
+        
   }    
   
   

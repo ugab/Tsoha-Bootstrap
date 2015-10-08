@@ -1,12 +1,16 @@
 <?php
 
-  $routes->get('/', function() {
-    AanestysController::lista();
-  });
+    $routes->get('/', function() {
+      AanestysController::lista();
+    });
 
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });
+    $routes->get('/omalista', function() {
+      AanestysController::omalista();
+    });  
+
+    $routes->get('/hiekkalaatikko', function() {
+      HelloWorldController::sandbox();
+    });
   
 //    $routes->get('/lista', function() {
 //    AanestysController::lista();
@@ -43,6 +47,11 @@
       // Pelin poisto
       AanestysController::destroy($id);
     });
+
+    $routes->post('/uloskirjautuminen', function(){
+      // Kirjautumislomakkeen esittäminen
+      KayttajaController::uloskirjautuminen();
+    });    
     
     $routes->get('/kirjaudu', function(){
       // Kirjautumislomakkeen esittäminen
@@ -53,7 +62,17 @@
       // Kirjautumisen käsittely
       KayttajaController::kasittele_kirjautuminen();
     });    
-        
+
+    $routes->get('/rekisteroidy', function(){
+      KayttajaController::rekisteroidy();
+    });    
+
+    $routes->post('/rekisteroidy', function(){
+      // Kirjautumisen käsittely
+      KayttajaController::store();
+    });
+            
     $routes->get('/:id', function($id){
         AanestysController::nayta($id);
     });
+    

@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
-
     
   <h1>Äänestyslista</h1>
 
@@ -42,5 +36,9 @@
     </tbody>
   </table>  
 
+
+  <p>
+    <a href="uusi" class="btn btn-success">Uusi äänestys</a>
+  </p>
   
 {% endblock %}

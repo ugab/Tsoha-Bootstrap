@@ -10,6 +10,13 @@
 </div>
 {% endif %}
   
+<form method="post" action="{{base_path}}/aanestys/{{aanestys.id}}/poista" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form>  
+<form method="get" action="{{base_path}}/aanestys/{{aanestys.id}}/muokkaa" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Muokkaa</button>
+</form>  
+  
 <!--  <p>
     <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
   </p>-->
@@ -37,7 +44,6 @@
           <td>{{ehdokas.nimi}}</td>
           <td>{{ehdokas.kuvaus}}</td>
           <td>{{ehdokas.aania}}</td>
-          
         </tr>
       {% endfor %}
     </tbody>

@@ -13,7 +13,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_salasana', 'validate_ nimi');
+        $this->validators = array('validate_salasana', 'validate_nimi');
     }
 /*
     public static function all() {
@@ -31,9 +31,9 @@ class Kayttaja extends BaseModel {
         return $users;
     }
 */
-    public static function authenticate($id, $salasana) {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id AND salasana = :salasana LIMIT 1');
-        $query->execute(array('id' => $id, 'salasana' => $salasana));
+    public static function authenticate($nimi, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi AND salasana = :salasana LIMIT 1');
+        $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
         $row = $query->fetch();
         if ($row) {
             $kayttaja = new Kayttaja(array( 
@@ -61,6 +61,13 @@ class Kayttaja extends BaseModel {
         return $kayttaja;
     }
     
+    public function save(){
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, salasana) VALUES (:nimi, :salasana) RETURNING id');
+        $query->execute(array('nimi' => $this->nimi, 'salasana' => $this->salasana));
+        $row = $query->fetch();
+
+    }      
+    
     public function validate_nimi(){
         $errors = array();
         if ($this->nimi == '' || $this->nimi == null) {
@@ -72,6 +79,13 @@ class Kayttaja extends BaseModel {
         if (strlen($this->nimi) > 50) {
             $errors[] = 'Nimen pituus liian pitkä';
         }
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $this->nimi));
+        $row = $query->fetch();
+        if ($row){
+            $errors[] = 'Nimi on jo käytössä';
+        }
+        
         return $errors;        
     }  
     
@@ -86,6 +100,13 @@ class Kayttaja extends BaseModel {
         if (strlen($this->salasana) > 50) {
             $errors[] = 'Salasanaa pituus liian pitkä';
         }
-        return $errors;        
-    }    
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE salasana = :salasana LIMIT 1');
+        $query->execute(array('salasana' => $this->salasana));
+        $row = $query->fetch();
+        if ($row){
+            $errors[] = 'Salasana on jo käytössä';
+        }
+        
+        return $errors;     
+    }
 }

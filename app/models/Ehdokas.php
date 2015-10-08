@@ -2,7 +2,7 @@
 
 class Ehdokas extends BaseModel{
     
-  public $id, $nimi, $kuvaus, $aanestysid;
+  public $id, $nimi, $kuvaus, $aanestysid, $aania;
   
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -27,7 +27,13 @@ class Ehdokas extends BaseModel{
         'id' => $row['id'],
         'nimi' => $row['nimi'],
         'kuvaus' => $row['kuvaus'],
-        'aanestysid' => $row['aanestysid']
+        'aanestysid' => $row['aanestysid'],
+        $query = DB::connection()->prepare('SELECT COUNT(*) FROM Aania WHERE ehdokasid=:id'),
+        // Suoritetaan kysely
+        $query->execute(array('id' => $row['id'])),
+        // Haetaan kyselyn tuottamat rivit
+        $aanet = $query->fetch(),
+        'aania' => $aanet  
       ));
     }
 
