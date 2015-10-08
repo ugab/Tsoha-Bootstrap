@@ -20,14 +20,14 @@
     $routes->get('/uusi', function(){
       AanestysController::uusi();
     });    
-        
-    $routes->get('/:id', function($id){
-        AanestysController::nayta($id);
-    });
+
+    $routes->get('/uusi/:id/uusiehdokas', function($id){
+      EhdokasController::uusiehdokas($id);
+    });        
     
-    $routes->get('/muokkaa', function() {
-      HelloWorldController::muokkaa();
-    });
+    $routes->post('/uusi/:id/uusiehdokas/tallenna', function($id){
+      EhdokasController::store($id);
+    });    
     
     $routes->get('/aanestys/:id/muokkaa', function($id){
       // Pelin muokkauslomakkeen esittäminen
@@ -46,10 +46,14 @@
     
     $routes->get('/kirjaudu', function(){
       // Kirjautumislomakkeen esittäminen
-      UserController::login();
+      KayttajaController::kirjaudu();
     });
     
     $routes->post('/kirjaudu', function(){
       // Kirjautumisen käsittely
-      UserController::handle_login();
+      KayttajaController::kasittele_kirjautuminen();
     });    
+        
+    $routes->get('/:id', function($id){
+        AanestysController::nayta($id);
+    });

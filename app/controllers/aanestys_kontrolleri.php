@@ -49,8 +49,8 @@ class AanestysController extends BaseController{
     if(count($errors) == 0){
       // Peli on validi, hyvä homma!
       $aanestys->save();
-
-      Redirect::to('/aanestys/' . $aanestys->id, array('message' => 'Peli on lisätty kirjastoosi!'));
+//      $ehdokkaat = Ehdokas::all($aanestys->id); ei tarvii ???
+      Redirect::to('/uusi/' . $aanestys->id .'/uusiehdokas');
     }else{
       // Pelissä oli jotain vikaa :(
       View::make('aanestys/uusi.html', array('errors' => $errors, 'attributes' => $attributes));

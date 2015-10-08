@@ -6,7 +6,7 @@ class Ehdokas extends BaseModel{
   
   public function __construct($attributes){
     parent::__construct($attributes);
-//    $this->validators = array('validate_salasana', 'validate_ nimi');
+    $this->validators = array('validate_nimi', 'validate_kuvaus');
   }
   
     public static function all($id){
@@ -60,9 +60,29 @@ class Ehdokas extends BaseModel{
     $query = DB::connection()->prepare('INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES (:nimi, :kuvaus, :aanestysid) RETURNING id');
     $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 'aanestysid' => $this->aanestysid));
     $row = $query->fetch();
-    Kint::trace();
-    Kint::dump($row);
 
   }  
-  
+
+    public function validate_nimi(){
+        $errors = array();
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Nimeä ei annettu';
+        }
+        if (strlen($this->nimi) < 3) {
+            $errors[] = 'Nimen pituus liian lyhyt';
+        }
+        if (strlen($this->nimi) > 50) {
+            $errors[] = 'Nimen pituus liian pitkä';
+        }
+        return $errors;        
+    }  
+    
+    public function validate_kuvaus(){
+
+        $errors = array();
+        if (strlen($this->kuvaus) > 400) {
+            $errors[] = 'kuvaus pituus liian pitkä';
+        }
+        return $errors;        
+    }      
 }

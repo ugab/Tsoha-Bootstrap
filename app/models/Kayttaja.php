@@ -63,13 +63,13 @@ class Kayttaja extends BaseModel {
     
     public function validate_nimi(){
         $errors = array();
-        if ($this->name == '' || $this->name == null) {
+        if ($this->nimi == '' || $this->nimi == null) {
             $errors[] = 'Nimeä ei annettu';
         }
-        if (strlen($this->name) < 3) {
+        if (strlen($this->nimi) < 3) {
             $errors[] = 'Nimen pituus liian lyhyt';
         }
-        if (strlen($this->name) > 50) {
+        if (strlen($this->nimi) > 50) {
             $errors[] = 'Nimen pituus liian pitkä';
         }
         return $errors;        

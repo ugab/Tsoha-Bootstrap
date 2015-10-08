@@ -19,7 +19,6 @@ CREATE TABLE Ehdokas(
   id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
   nimi varchar(50) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!  player_id INTEGER REFERENCES Player(id),
   kuvaus varchar(50),
-  aania INTEGER,
   aanestysid INTEGER REFERENCES Aanestys(id)
 );
 

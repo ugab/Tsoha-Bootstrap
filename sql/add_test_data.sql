@@ -10,8 +10,8 @@
     INSERT INTO Aanestys (nimi, aanestysalkaa, aanestysloppuu, kuvaus, onkoid, luojaid) VALUES ('in the butt', '2011-11-11', '2012-11-11', 'Arrow to the knee', 'false', '5');
 
     -- Ehdokas-taulun testidata
-    INSERT INTO Ehdokas (nimi, kuvaus, aania, aanestysid) VALUES ('tupu', 'punainen', '0', '1'); -- Koska id-sarakkeen tietotyyppi on SERIAL, se asetetaan automaattisesti
-    INSERT INTO Ehdokas (nimi, kuvaus, aania, aanestysid) VALUES ('lupu', 'vihree', '0', '1');
-    INSERT INTO Ehdokas (nimi, kuvaus, aania, aanestysid) VALUES ('hupu', 'sininen', '0', '1');
-    INSERT INTO Ehdokas (nimi, kuvaus, aania, aanestysid) VALUES ('laaalaaa', 'wut', '0', '1');
-    INSERT INTO Ehdokas (nimi, kuvaus, aania, aanestysid) VALUES ('juntti', 'urpo', '0', '1');
+    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('tupu', 'punainen', '1'); -- Koska id-sarakkeen tietotyyppi on SERIAL, se asetetaan automaattisesti
+    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('lupu', 'vihree', '1');
+    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('hupu', 'sininen', '1');
+    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('laaalaaa', 'wut', '1');
+    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('juntti', 'urpo', '1');
