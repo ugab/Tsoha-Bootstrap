@@ -14,4 +14,9 @@
     INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('lupu', 'vihree', '1');
     INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('hupu', 'sininen', '1');
     INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('laaalaaa', 'wut', '1');
-    INSERT INTO Ehdokas (nimi, kuvaus, aanestysid) VALUES ('juntti', 'urpo', '1');
+    
+
+    INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES ('1', '1');
+    INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES ('1', '1');
+    INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES ('1', '1');
+    INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES ('1', '1');

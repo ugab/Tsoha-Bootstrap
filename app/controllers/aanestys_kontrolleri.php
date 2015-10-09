@@ -23,7 +23,9 @@ class AanestysController extends BaseController{
     
     $kayttaja=self::get_user_logged_in();
     
-    if(($kayttaja->id)==$aanestys->luojaid){
+    if(!$kayttaja){
+        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+    }else if(($kayttaja->id)==$aanestys->luojaid){
         View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
     }else{
         View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
@@ -113,6 +115,6 @@ class AanestysController extends BaseController{
 
     // Ohjatan käyttäjä pelien listaussivulle ilmoituksen kera
     Redirect::to('/', array('message' => 'Peli on poistettu onnistuneesti!'));
-  }    
+  }   
   
 }

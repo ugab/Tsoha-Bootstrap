@@ -28,12 +28,11 @@ class Ehdokas extends BaseModel{
         'nimi' => $row['nimi'],
         'kuvaus' => $row['kuvaus'],
         'aanestysid' => $row['aanestysid'],
-        $query = DB::connection()->prepare('SELECT COUNT(*) FROM Aania WHERE ehdokasid=:id'),
-        // Suoritetaan kysely
-        $query->execute(array('id' => $row['id'])),
-        // Haetaan kyselyn tuottamat rivit
+        $haku = 'SELECT COUNT(*) AS aania FROM Aanet WHERE ehdokasid=:ehdokasid',
+        $query = DB::connection()->prepare($haku),
+        $query->execute(array('ehdokasid' => $row['id'])),
         $aanet = $query->fetch(),
-        'aania' => $aanet  
+        'aania' => $aanet['aania']  
       ));
     }
 

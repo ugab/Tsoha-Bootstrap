@@ -45,5 +45,17 @@ class Aani extends BaseModel {
         }
         return $aanet;
     }
-    
+
+    public function save(){
+        
+        if(!$this->aanestajaid){
+            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
+            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
+        }else{
+            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
+            $query->execute(array('aanestajaid' => $this->aanestajaid, 'ehdokasid' => $this->ehdokasid));
+        }
+        
+
+  }      
 }

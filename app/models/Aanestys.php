@@ -36,10 +36,10 @@ class Aanestys extends BaseModel{
   }
   
     public static function find_all($id){
-    // Alustetaan kysely tietokantayhteydellämme
+    
     $query = DB::connection()->prepare('SELECT * FROM Aanestys WHERE luojaid=:id');
     // Suoritetaan kysely
-    $query->execute();
+    $query->execute(array('id' => $id));
     // Haetaan kyselyn tuottamat rivit
     $rows = $query->fetchAll();
     $Aanestykset = array();

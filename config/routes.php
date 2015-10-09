@@ -76,3 +76,7 @@
         AanestysController::nayta($id);
     });
     
+    $routes->post('/aanesta', function(){
+      // Aanen antaminen
+      AaniController::aani();
+    });

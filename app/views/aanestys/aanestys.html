@@ -34,10 +34,16 @@
       {% for ehdokas in ehdokkaat %}
         <tr>
           <!--<td><a href="{{base_path}}/aanestys/{{aanestys.id}}">{{aanestys.nimi}}</td>-->
-          <td>{{ehdokas.nimi}}</td>
-          <td>{{ehdokas.kuvaus}}</td>
-          <td>{{ehdokas.aania}}</td>
-          
+            <td>{{ehdokas.nimi}}</td>
+            <td>{{ehdokas.kuvaus}}</td>
+            <td>{{ehdokas.aania}}</td>
+            <td>
+                <form method="post" action="{{base_path}}/aanesta">
+                    <input name='aanestysid' value='{{aanestys.id}}' type='hidden'>
+                    <input name='ehdokasid' value='{{ehdokas.id}}' type='hidden'>
+                    <button type="submit" class="button">Äänestä</button>
+                </form>
+            </td>
         </tr>
       {% endfor %}
     </tbody>
