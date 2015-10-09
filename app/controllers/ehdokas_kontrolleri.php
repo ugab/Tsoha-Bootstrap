@@ -41,6 +41,16 @@ class EhdokasController extends BaseController{
       View::make('ehdokas/uusiehdokas.html', array('errors' => $errors, 'ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys, 'attributes' => $attributes));
     }
 
-  }  
+  }
+  
+  
+  public static function destroy($id){
+    
+    $ehdokas = new Ehdokas(array('id' => $id));
+
+    $ehdokas->destroy($id);
+
+    Redirect::to('/aanestys/:id/muokkaa', array('message' => 'Ehdokas on poistettu onnistuneesti!'));
+  }      
   
 }

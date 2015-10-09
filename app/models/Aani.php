@@ -8,7 +8,7 @@
 
 class Aani extends BaseModel {
     public $id;
-    public $aanestajaid;
+//    public $aanestajaid;
     public $ehdokasid;
 
     public function __construct($attributes) {
@@ -25,7 +25,7 @@ class Aani extends BaseModel {
         foreach ($rows as $row) {
             $aanet[] = new Aani(array(
                 'id' => $row['id'],
-                'aanestajaid' => $row['aanestajaid'],
+//                'aanestajaid' => $row['aanestajaid'],
                 'ehdokasid' => $row['ehdokasid']
             ));
         }
@@ -40,7 +40,7 @@ class Aani extends BaseModel {
         if ($row) {
             $aanet = new Aani(array(
                 'id' => $row['id'],
-                'aanestajaid' => $row['aanestajaid'],
+//                'aanestajaid' => $row['aanestajaid'],
                 'ehdokasid' => $row['ehdokasid']
             ));
         }
@@ -56,8 +56,8 @@ class Aani extends BaseModel {
 //            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
 //            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
 //        }else{
-            $query = DB::connection()->prepare('INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
-            $query->execute(array('aanestajaid' => $this->aanestajaid, 'ehdokasid' => $this->ehdokasid));
+            $query = DB::connection()->prepare('INSERT INTO Aanet (ehdokasid) VALUES (:ehdokasid) RETURNING id');
+            $query->execute(array('ehdokasid' => $this->ehdokasid));
 //        }
         
 

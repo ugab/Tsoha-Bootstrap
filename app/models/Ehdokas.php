@@ -67,6 +67,12 @@ class Ehdokas extends BaseModel{
     $row = $query->fetch();
 
   }  
+ 
+    public function destroy($id){
+        $query = DB::connection()->prepare('DELETE FROM Ehdokas where id = :id');
+        $query->execute(array('id' => $this->id));
+        
+  }      
 
     public function validate_nimi(){
         $errors = array();

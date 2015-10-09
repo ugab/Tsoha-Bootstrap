@@ -47,6 +47,11 @@
       // Pelin poisto
       AanestysController::destroy($id);
     });
+    
+    $routes->post('/ehdokas/:id/poista', function($id){
+      // Ehdokkaan poisto
+      EhdokasController::destroy($id);
+    });    
 
     $routes->post('/uloskirjautuminen', function(){
       // Kirjautumislomakkeen esittäminen

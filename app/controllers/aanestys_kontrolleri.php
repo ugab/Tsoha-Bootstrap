@@ -86,7 +86,9 @@ class AanestysController extends BaseController{
 
   public static function edit($id){
     $aanestys = Aanestys::find($id);
-    View::make('aanestys/muokkaa.html', array('aanestys' => $aanestys));
+    $ehdokkaat = Ehdokas::all($id);
+    
+    View::make('aanestys/muokkaa.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
   }
 
   // Pelin muokkaaminen (lomakkeen käsittely)

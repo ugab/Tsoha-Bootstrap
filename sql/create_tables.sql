@@ -28,3 +28,9 @@ CREATE TABLE Aanet(
   aanestajaid INTEGER REFERENCES Kayttaja(id), -- Muista erottaa sarakkeiden määrittelyt pilkulla!
   ehdokasid INTEGER REFERENCES Ehdokas(id)
 );
+
+CREATE TABLE Aanestaneet(
+  id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
+  aanestajaid INTEGER REFERENCES Kayttaja(id), -- Muista erottaa sarakkeiden määrittelyt pilkulla!
+  aanestysid INTEGER REFERENCES Aanestys(id)
+);
