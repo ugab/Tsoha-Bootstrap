@@ -71,7 +71,11 @@
       // Kirjautumisen käsittely
       KayttajaController::store();
     });
-            
+
+    $routes->get('/omalista/:id', function($id){
+        AanestysController::naytaomaaanestys($id);
+    });
+    
     $routes->get('/:id', function($id){
         AanestysController::nayta($id);
     });

@@ -13,11 +13,13 @@ class AaniController extends BaseController{
            'aanestajaid' => $kayttaja->id,
            'ehdokasid' => $params['ehdokasid']
         ));
-    }else{
+    }else if($params['onkoid']!=1){
         $attributes = (array(
-//           'aanestajaid' => $kayttaja->id,
+           'aanestajaid' => NULL,
            'ehdokasid' => $params['ehdokasid']
-        ));        
+        ));                   
+    }else{
+        Redirect::to('/' . $params['aanestysid'], array('message' => 'Kirjaudu niin voit äänestää'));
     }
 
     $aani = new Aani($attributes);

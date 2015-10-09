@@ -21,17 +21,27 @@ class AanestysController extends BaseController{
     $aanestys = Aanestys::find($id);
     $ehdokkaat = Ehdokas::all($id);
     
-    $kayttaja=self::get_user_logged_in();
+    View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
     
-    if(!$kayttaja){
-        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
-    }else if(($kayttaja->id)==$aanestys->luojaid){
-        View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
-    }else{
-        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
-    }
+//    $kayttaja=self::get_user_logged_in();
+//                                                                          HUONO IDEA
+//    if(!$kayttaja){
+//        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+//    }else if(($kayttaja->id)==$aanestys->luojaid){
+//        View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+//    }else{
+//        View::make('aanestys/aanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+//    }
     
   }
+  
+  public static function naytaomaaanestys($id){
+      
+    $aanestys = Aanestys::find($id);
+    $ehdokkaat = Ehdokas::all($id);
+    
+    View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+  }  
   
   public static function uusi(){
       

@@ -16,6 +16,7 @@ class Aani extends BaseModel {
         /*$this->validators = array('validate_password', 'validate_ user');*/
     }
 
+    
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Aani');
         $query->execute();
@@ -46,15 +47,18 @@ class Aani extends BaseModel {
         return $aanet;
     }
 
+    
     public function save(){
         
-        if(!$this->aanestajaid){
-            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
-            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
-        }else{
-            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
+//        $kayttaja=self::get_user_logged_in();
+        
+//        if(!$id){
+//            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
+//            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
+//        }else{
+            $query = DB::connection()->prepare('INSERT INTO Aanet (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
             $query->execute(array('aanestajaid' => $this->aanestajaid, 'ehdokasid' => $this->ehdokasid));
-        }
+//        }
         
 
   }      
