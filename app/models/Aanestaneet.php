@@ -38,9 +38,9 @@ class Aanestaneet extends BaseModel {
         $query->execute(array('aanestajaid' => $aanestajaid, 'aanestysid' => $aanestysid));
         $row = $query->fetch();
         if (!$row) {
-            return 1;
+            return 1;//ei ole äänestämneet
         }
-        return 0;
+        return 0;//on aanestanyt
     }
 
     
@@ -52,8 +52,8 @@ class Aanestaneet extends BaseModel {
 //            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
 //            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
 //        }else{
-            $query = DB::connection()->prepare('INSERT INTO Aanet (ehdokasid) VALUES (:ehdokasid) RETURNING id');
-            $query->execute(array('ehdokasid' => $this->ehdokasid));
+            $query = DB::connection()->prepare('INSERT INTO Aanestaneet (aanestysid, aanestajaid) VALUES (:aanestysid, :aanestajaid) RETURNING id');
+            $query->execute(array('aanestysid' => $this->aanestysid, 'aanestajaid' => $this->aanestajaid));
 //        }
         
 //            $aanet = new Aani(array(

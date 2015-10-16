@@ -8,8 +8,9 @@
 
 class Aani extends BaseModel {
     public $id;
-//    public $aanestajaid;
+    public $aanestetty;
     public $ehdokasid;
+    public $ehdokasnimi;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -25,8 +26,9 @@ class Aani extends BaseModel {
         foreach ($rows as $row) {
             $aanet[] = new Aani(array(
                 'id' => $row['id'],
-//                'aanestajaid' => $row['aanestajaid'],
-                'ehdokasid' => $row['ehdokasid']
+                'aanestetty' => $row['aanestetty'],
+                'ehdokasid' => $row['ehdokasid'],
+                'ehdokasnimi' => $row['ehdokasnimi']
             ));
         }
         return $aanet;
@@ -40,8 +42,9 @@ class Aani extends BaseModel {
         if ($row) {
             $aanet = new Aani(array(
                 'id' => $row['id'],
-//                'aanestajaid' => $row['aanestajaid'],
-                'ehdokasid' => $row['ehdokasid']
+                'aanestetty' => $row['aanestetty'],
+                'ehdokasid' => $row['ehdokasid'],
+                'ehdokasnimi' => $row['ehdokasnimi']
             ));
         }
         return $aanet;
@@ -56,8 +59,9 @@ class Aani extends BaseModel {
 //            $query = DB::connection()->prepare('INSERT INTO Aani (aanestajaid, ehdokasid) VALUES (:aanestajaid, :ehdokasid) RETURNING id');
 //            $query->execute(array('aanestajaid' => NULL, 'ehdokasid' => $this->ehdokasid));
 //        }else{
-            $query = DB::connection()->prepare('INSERT INTO Aanet (ehdokasid) VALUES (:ehdokasid) RETURNING id');
-            $query->execute(array('ehdokasid' => $this->ehdokasid));
+        $this->aanestetty=date('Y/m/d H:i:s');
+        $query = DB::connection()->prepare('INSERT INTO Aanet (ehdokasnimi, ehdokasid, aanestetty) VALUES (:ehdokasnimi, :ehdokasid, :aanestetty) RETURNING id');
+        $query->execute(array('ehdokasid' => $this->ehdokasid, 'ehdokasnimi' => $this->ehdokasnimi, 'aanestetty' => $this->aanestetty));
 //        }
         
 

@@ -39,9 +39,12 @@
             <td>{{ehdokas.aania}}</td>
             <td>
                 <form method="post" action="{{base_path}}/aanesta">
+                    <input name='aanestysalkaa' value='{{aanestys.aanestysalkaa}}' type='hidden'>
+                    <input name='aanestysloppuu' value='{{aanestys.aanestysloppuu}}' type='hidden'>
                     <input name='onkoid' value='{{aanestys.onkoid}}' type='hidden'>
                     <input name='aanestysid' value='{{aanestys.id}}' type='hidden'>
                     <input name='ehdokasid' value='{{ehdokas.id}}' type='hidden'>
+                    <input name='ehdokasnimi' value='{{ehdokas.nimi}}' type='hidden'>
                     <button type="submit" class="button">Äänestä</button>
                 </form>
             </td>

@@ -6,7 +6,7 @@ class Aanestys extends BaseModel{
   
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_kuvaus', 'validate_nimi');
+    $this->validators = array('validate_kuvaus', 'validate_nimi', 'validate_aikarajoitteet');
   }
   
     public static function all(){
@@ -134,10 +134,41 @@ class Aanestys extends BaseModel{
     public function validate_kuvaus(){
 
         $errors = array();
-        if (strlen($this->kuvaus) > 400) {
+        if (strlen($this->kuvaus) > 150) {
             $errors[] = 'kuvaus pituus liian pitkä';
         }
         return $errors;        
     }      
-    
+
+    public function validate_aikarajoitteet(){
+
+        $errors = array();
+
+
+        $aanestysalkaa = DateTime::createFromFormat('Y#m#d', $this->aanestysalkaa);
+        if(!$aanestysalkaa) {
+            $errors[] = 'aanestysalkaa annettu väärässä formaatissa';
+        } else {
+           //change it to any format you want with format() (e.g. 2013-08-31)
+           $aanestysalkaa->format("Y-m-d");
+        }
+//        echo $aanestysalkaa;
+        $aanestysloppuu = DateTime::createFromFormat('Y#m#d', $this->aanestysalkaa);
+        if(!$aanestysloppuu) {
+            $errors[] = 'aanestysloppuu annettu väärässä formaatissa';
+        } else {
+           //change it to any format you want with format() (e.g. 2013-08-31)
+           $aanestysloppuu->format("Y-m-d");
+        }
+        
+        if(strtotime($this->aanestysalkaa) > strtotime($this->aanestysloppuu)){ 
+             $errors[] = 'aanestys ei voi alkaa sen jälkeen kun se on loppunut';
+        }
+        
+        if(strtotime('now') > strtotime($this->aanestysloppuu)){ 
+             $errors[] = 'aanestys ei voi loppua ennen kuin se on alkanut';
+        }
+        
+        return $errors;
+    }          
 }

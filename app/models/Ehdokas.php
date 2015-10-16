@@ -91,7 +91,7 @@ class Ehdokas extends BaseModel{
     public function validate_kuvaus(){
 
         $errors = array();
-        if (strlen($this->kuvaus) > 400) {
+        if (strlen($this->kuvaus) > 50) {
             $errors[] = 'kuvaus pituus liian pitkä';
         }
         return $errors;        

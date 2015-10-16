@@ -3,10 +3,9 @@ CREATE TABLE Aanestys(
     nimi varchar(50) NOT NULL,
     aanestysalkaa Date,
     aanestysloppuu Date,
-    kuvaus varchar (400),
+    kuvaus varchar (150),
     onkoid boolean DEFAULT FALSE,
     luojaid INTEGER
-
 );
 
 CREATE TABLE Kayttaja(
@@ -25,8 +24,10 @@ CREATE TABLE Ehdokas(
 
 CREATE TABLE Aanet(
   id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
-  aanestajaid INTEGER REFERENCES Kayttaja(id), -- Muista erottaa sarakkeiden määrittelyt pilkulla!
-  ehdokasid INTEGER REFERENCES Ehdokas(id)
+--   aanestajaid INTEGER REFERENCES Kayttaja(id), -- Muista erottaa sarakkeiden määrittelyt pilkulla!
+  ehdokasnimi varchar(50),
+  ehdokasid INTEGER REFERENCES Ehdokas(id),
+  aanestetty Date
 );
 
 CREATE TABLE Aanestaneet(

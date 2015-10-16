@@ -39,8 +39,9 @@ class AanestysController extends BaseController{
       
     $aanestys = Aanestys::find($id);
     $ehdokkaat = Ehdokas::all($id);
+    $aanet = Aani::all($id);
     
-    View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys));
+    View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys, 'aanet' => $aanestys));
   }  
   
   public static function uusi(){
@@ -94,6 +95,7 @@ class AanestysController extends BaseController{
   // Pelin muokkaaminen (lomakkeen käsittely)
   public static function update($id){
     $params = $_POST;
+    $kayttaja=self::get_user_logged_in();
 
     $attributes = array(
         'nimi' => $params['nimi'],
@@ -101,7 +103,7 @@ class AanestysController extends BaseController{
         'aanestysloppuu' => $params['aanestysloppuu'],
         'kuvaus' => $params['kuvaus'],
         'onkoid' => $params['onkoid'],
-        'luojaid' => '1'
+        'luojaid' => $kayttaja->id
     );
 
     // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
