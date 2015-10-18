@@ -46,7 +46,7 @@ class Aanestys extends BaseModel{
 
     // Käydään kyselyn tuottamat rivit läpi
     foreach($rows as $row){
-      // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
+
       $Aanestykset[] = new Aanestys(array(
         'id' => $row['id'],
         'nimi' => $row['nimi'],
@@ -108,8 +108,19 @@ class Aanestys extends BaseModel{
 
   
     public function destroy($id){
+//        DELETE FROM Aanet
+//        WHERE EXISTS
+//        ( SELECT customers.customer_name
+//          FROM customers
+//          WHERE customers.customer_id = suppliers.supplier_id
+//          AND customers.customer_name = 'IBM' );
+
+        
         $query = DB::connection()->prepare('DELETE FROM Ehdokas where aanestysid = :id');
         $query->execute(array('id' => $this->id));
+        
+        $query = DB::connection()->prepare('DELETE FROM Aanestaneet where aanestysid = :id');
+        $query->execute(array('id' => $this->id));        
         
         $query = DB::connection()->prepare('DELETE FROM Aanestys where id = :id');
         $query->execute(array('id' => $this->id));

@@ -19,7 +19,7 @@ class Aani extends BaseModel {
 
     
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Aani');
+        $query = DB::connection()->prepare('SELECT * FROM Aanet');
         $query->execute();
         $rows = $query->fetchAll();
         $aanet = array();
@@ -36,7 +36,7 @@ class Aani extends BaseModel {
 
 
     public static function find($ehdokasid) {
-        $query = DB::connection()->prepare('SELECT * FROM Aani WHERE id = :ehdokasid');
+        $query = DB::connection()->prepare('SELECT * FROM Aanet WHERE id = :ehdokasid');
         $query->execute(array('ehdokasid' => $ehdokasid));
         $row = $query->fetch();
         if ($row) {

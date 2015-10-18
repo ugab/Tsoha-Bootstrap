@@ -41,7 +41,7 @@ class AanestysController extends BaseController{
     $ehdokkaat = Ehdokas::all($id);
     $aanet = Aani::all($id);
     
-    View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys, 'aanet' => $aanestys));
+    View::make('aanestys/omaaanestys.html', array('ehdokkaat' => $ehdokkaat, 'aanestys' => $aanestys, 'aanet' => $aanet));
   }  
   
   public static function uusi(){
@@ -98,6 +98,7 @@ class AanestysController extends BaseController{
     $kayttaja=self::get_user_logged_in();
 
     $attributes = array(
+        'id' => $params['id'],
         'nimi' => $params['nimi'],
         'aanestysalkaa' => $params['aanestysalkaa'],
         'aanestysloppuu' => $params['aanestysloppuu'],
@@ -111,24 +112,31 @@ class AanestysController extends BaseController{
     $errors = $aanestys->errors();
 
     if(count($errors) > 0){
-      View::make('aanestys/muokkaa.html', array('errors' => $errors, 'aanestys' => $attributes));
+      Redirect::to('/aanestys/' . $id . '/muokkaa', array('errors' => $errors, 'aanestys' => $attributes));
     }else{
       // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
       $aanestys->update($id);
 
-      Redirect::to('/' . $aanestys->id, array('message' => 'Peliä on muokattu onnistuneesti!'));
+      Redirect::to('/' . $id, array('message' => 'Aanestystä on muokattu onnistuneesti!'));
     }
   }
 
-  // Pelin poistaminen
+  // poistaminen
   public static function destroy($id){
-    // Alustetaan Game-olio annetulla id:llä
+
+    $ehdokkaat = Ehdokas::all($id);
+    foreach($ehdokkaat as $ehdokas){
+        
+
+        $ehdokas->destroy($ehdokas->id);
+        
+    }
+  
     $aanestys = new Aanestys(array('id' => $id));
-    // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
+
     $aanestys->destroy($id);
 
-    // Ohjatan käyttäjä pelien listaussivulle ilmoituksen kera
-    Redirect::to('/', array('message' => 'Peli on poistettu onnistuneesti!'));
+    Redirect::to('/', array('message' => 'Aanestys on poistettu onnistuneesti!'));
   }   
   
 }

@@ -69,6 +69,10 @@ class Ehdokas extends BaseModel{
   }  
  
     public function destroy($id){
+        
+        $query = DB::connection()->prepare('DELETE FROM Aanet where ehdokasid = :id');
+        $query->execute(array('id' => $this->id));        
+        
         $query = DB::connection()->prepare('DELETE FROM Ehdokas where id = :id');
         $query->execute(array('id' => $this->id));
         

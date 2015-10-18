@@ -19,7 +19,8 @@ class AaniController extends BaseController{
 
         if($tarkista){   //ei ole aanestanyt
             $aani_attributes = (array(
-               'ehdokasid' => $params['ehdokasid']
+               'ehdokasnimi' => $params['ehdokasnimi'],
+                'ehdokasid' => $params['ehdokasid']
             ));
             $aanestaneet_attributes = (array(//lisataan etta on aanestanyt
                'aanestajaid' => $kayttaja->id,
@@ -36,7 +37,7 @@ class AaniController extends BaseController{
             Redirect::to('/' . $params['aanestysid'], array('message' => 'Olet jo äänestänyt'));
         }else if($params['onkoid']!=1){//ei id aanestys
             $aani_attributes = (array(
-               'aanestajaid' => NULL,
+               'ehdokasnimi' => $params['ehdokasnimi'],
                'ehdokasid' => $params['ehdokasid']
             ));
             setcookie($aanestysid);
@@ -66,7 +67,7 @@ class AaniController extends BaseController{
 //    }else{
 //        Redirect::to('/' . $params['aanestysid'], array('message' => 'Kirjaudu niin voit äänestää'));
 //    }
-    $aani_attributes = (array('ehdokasnimi' => $params['ehdokasnimi']));
+//    $aani_attributes = (array('ehdokasnimi' => $params['ehdokasnimi']));
     
     $aani = new Aani($aani_attributes);
     
